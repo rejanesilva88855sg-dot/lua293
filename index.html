@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSN Store | Next Gen Gift Cards</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           VIBE CYBERPUNK / GLASSMORPHISM
+           ========================================= */
+        :root {
+            --primary-neon: #00f3ff;
+            --secondary-neon: #bc13fe;
+            --bg-gradient-1: #0f0c29;
+            --bg-gradient-2: #302b63;
+            --bg-gradient-3: #24243e;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0c29; }
+        ::-webkit-scrollbar-thumb { background: var(--secondary-neon); border-radius: 4px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER FLUTUANTE */
+        .header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--primary-neon);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i { color: var(--primary-neon); font-size: 1.2em; }
+
+        /* HERO SECTION */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5em;
+            background: linear-gradient(to right, #fff, var(--primary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* GRID DE PRODUTOS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            padding-bottom: 80px;
+        }
+
+        /* CARD GLASSMORPHISM */
+        .product-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .product-card:hover::before { left: 100%; }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--secondary-neon);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+        }
+
+        .product-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .price-tag {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--primary-neon);
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+            margin: 10px 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* BOTÕES ESTILIZADOS */
+        .btn-buy {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--secondary-neon);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-buy::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 0%;
+            background: var(--secondary-neon);
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+        .btn-buy:hover::after { height: 100%; }
+        .btn-buy:hover { box-shadow: 0 0 15px var(--secondary-neon); border-color: transparent; }
+
+        /* FOOTER */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9em;
+        }
+
+        /* =========================================
+           MODAIS COM EFEITO BLUR
+           ========================================= */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal-content {
+            background: #1a1a2e;
+            background: linear-gradient(135deg, rgba(26,26,46,0.95), rgba(22,33,62,0.95));
+            border: 1px solid var(--glass-border);
+            margin: 5vh auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+            position: relative;
+            color: #fff;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px; top: 20px;
+            font-size: 30px;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--secondary-neon); transform: rotate(90deg); }
+
+        .modal h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--primary-neon);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        /* INPUTS ESTILO FUTURISTA */
+        #address-form input, #address-form select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+            border-radius: 5px 5px 0 0;
+        }
+
+        #address-form input:focus {
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--primary-neon);
+        }
+
+        #address-form label {
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .checkout-summary {
+            background: rgba(0, 243, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary-neon);
+        }
+
+        /* PIX AREA */
+        .pix-option {
+            background: rgba(39, 174, 96, 0.2);
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #2ecc71;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pix-option img { height: 20px; filter: brightness(0) invert(1); }
+
+        .btn-pay-now {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            border: none;
+            padding: 18px;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.1em;
+            box-shadow: 0 5px 20px rgba(56, 239, 125, 0.4);
+            transition: 0.3s;
+        }
+        
+        .btn-pay-now:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(56, 239, 125, 0.6); }
+
+        /* MODAL PIX DETALHES */
+        .countdown-circle {
+            font-size: 2.5em;
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--secondary-neon);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .pix-key-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--primary-neon);
+            margin: 20px 0;
+            word-break: break-all;
+            position: relative;
+        }
+
+        .copy-btn {
+            background: var(--primary-neon);
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .copy-btn:hover { background: #fff; box-shadow: 0 0 15px var(--primary-neon); }
+
+        .pending-message {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: none;
+            border: 1px solid #f39c12;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2em; }
+            .products-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fab fa-playstation"></i> PSN CARDS
+            </div>
+            <div style="color: var(--primary-neon); font-size: 0.9em;">
+                <i class="fas fa-check-circle"></i> Entrega Automática
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Level Up Your Game</h2>
+            <p>Códigos digitais originais com envio imediato via E-mail. Segurança total e checkout via PIX.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="products-container" class="products-grid">
+            </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p style="margin-bottom: 10px;">&copy; 2025 Flash Games - CNPJ: 29.822.940/0001-48</p>
+            <p><i class="fas fa-envelope"></i> contato@flashgamesp.com.br | <i class="fas fa-phone"></i> (85) 99212-9136</p>
+        </div>
+    </footer>
+
+
+    <div id="address-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <h3><i class="fas fa-shopping-cart"></i> Checkout Digital</h3>
+            
+            <div class="checkout-summary">
+                <div>
+                    <strong style="color: #fff; display:block;" id="product-name-display">PSN Card</strong>
+                    <span style="font-size: 0.8em; opacity: 0.8;">Envio por E-mail</span>
+                </div>
+                <div id="display-price" style="font-size: 1.5em; font-weight: bold; color: var(--primary-neon);">R$ 0,00</div>
+            </div>
+
+            <form id="address-form">
+                <div id="product-select-group" style="display:none;">
+                    <select id="product-select"><option value=""></option></select>
+                </div>
+
+                <label>Dados do Comprador</label>
+                <input type="text" id="nome" placeholder="Nome Completo" required>
+                <input type="tel" id="telefone" placeholder="WhatsApp / Telefone" required>
+                
+                <label>Onde receber o código?</label>
+                <input type="email" id="email" placeholder="Seu melhor E-mail" required>
+
+                <label>Segurança (CEP)</label>
+                <input type="text" id="cep" placeholder="Apenas números" maxlength="8" required>
+
+                <div class="pix-option">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg" alt="PIX">
+                    PAGAMENTO VIA PIX
+                </div>
+
+                <button type="submit" class="btn-pay-now">
+                    GERAR PAGAMENTO <i class="fas fa-bolt"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="pix-modal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-btn" id="close-pix-x">&times;</span>
+            
+            <h3><i class="fas fa-qrcode"></i> PIX Gerado</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9em;">Seu código será liberado após a confirmação.</p>
+
+            <div class="countdown-circle">
+                <i class="far fa-clock"></i> <span id="countdown">10:00</span>
+            </div>
+
+            <p>Valor Total: <strong style="color: var(--primary-neon); font-size: 1.3em;" id="pix-value-display">R$ 0,00</strong></p>
+
+            <div class="pix-key-box">
+                <p style="font-size: 0.8em; text-transform:uppercase; color: #aaa;">Chave CPF</p>
+                <strong style="font-size: 1.2em; color: #fff;" id="pix-key-display">081.904.013-43</strong>
+                <br>
+                <button class="copy-btn" data-copy="08190401343">
+                    <i class="far fa-copy"></i> COPIAR CHAVE
+                </button>
+            </div>
+
+            <p style="font-size: 0.8em; color: #aaa;">Titular: <strong style="color: #fff;">Brenda do Nascimento Silveira</strong></p>
+
+            <div class="pending-message">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Aguardando Pagamento!</strong><br>
+                O código chegará no seu e-mail assim que o banco confirmar.
+            </div>
+
+            <button id="close-pix-btn" class="btn-buy" style="margin-top: 20px; border-color: rgba(255,255,255,0.3);">
+                Fechar Janela
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dados dos produtos
+            const productData = [
+                { value: 15.00, price: 15.00, name: "PSN Card R$ 15" },
+                { value: 30.00, price: 30.00, name: "PSN Card R$ 30" },
+                { value: 50.00, price: 50.00, name: "PSN Card R$ 50" },
+                { value: 60.00, price: 60.00, name: "PSN Card R$ 60" },
+                { value: 100.00, price: 98.00, name: "PSN Card R$ 100" },
+                { value: 120.00, price: 118.00, name: "PSN Card R$ 120" },
+                { value: 150.00, price: 145.00, name: "PSN Card R$ 150" },
+                { value: 200.00, price: 195.00, name: "PSN Card R$ 200" },
+                { value: 250.00, price: 240.00, name: "PSN Card R$ 250" },
+                { value: 300.00, price: 290.00, name: "PSN Card R$ 300" }
+            ];
+
+            const productsContainer = document.getElementById('products-container');
+            const addressModal = document.getElementById('address-modal');
+            const pixModal = document.getElementById('pix-modal');
+            const addressForm = document.getElementById('address-form');
+            const closeModalBtns = document.querySelectorAll('.close-btn');
+            const copyBtn = document.querySelector('.copy-btn');
+            const pendingMessage = document.querySelector('.pending-message'); 
+            const closePixBtn = document.getElementById('close-pix-btn');
+            const countdownDisplay = document.getElementById('countdown');
+            const cepInput = document.getElementById('cep');
+            const displayPrice = document.getElementById('display-price');
+            const pixValueDisplay = document.getElementById('pix-value-display');
+            const productNameDisplay = document.getElementById('product-name-display');
+            const productSelect = document.getElementById('product-select');
+            
+            let currentProduct = {};
+            let countdownInterval;
+
+            const formatPrice = (price) => {
+                return `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`;
+            };
+
+            // 1. Geração Dinâmica dos Cards
+            productData.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                // Imagem genérica estilizada
+                card.innerHTML = `
+                    <div style="position:relative;">
+                        <img src="https://cdn.awsli.com.br/2500x2500/2430/2430819/produto/234443245/psn-530-6hzaxry7ix.jpg" alt="${product.name}">
+                    </div>
+                    <h3>${product.name}</h3>
+                    <div class="price-tag">${formatPrice(product.price)}</div>
+                    <button class="btn-buy" data-value="${product.value}" data-price="${product.price}" data-name="${product.name}">
+                        Comprar <i class="fas fa-chevron-right"></i>
+                    </button>
+                `;
+                productsContainer.appendChild(card);
+            });
+
+            // 2. Ação de Compra
+            productsContainer.addEventListener('click', function(event) {
+                if (event.target.closest('.btn-buy')) {
+                    const btn = event.target.closest('.btn-buy');
+                    
+                    currentProduct = {
+                        value: parseFloat(btn.dataset.value),
+                        price: parseFloat(btn.dataset.price),
+                        name: btn.dataset.name
+                    };
+
+                    displayPrice.textContent = formatPrice(currentProduct.price);
+                    productNameDisplay.textContent = currentProduct.name;
+                    productSelect.innerHTML = `<option value="${currentProduct.price}" selected>${currentProduct.name}</option>`;
+                    
+                    addressModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            // 3. Fechar Modais
+            const closeModals = () => {
+                addressModal.style.display = 'none';
+                pixModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; 
+                if (countdownInterval) clearInterval(countdownInterval);
+            };
+
+            closeModalBtns.forEach(btn => btn.addEventListener('click', closeModals));
+            closePixBtn.addEventListener('click', closeModals);
+
+            window.addEventListener('click', function(event) {
+                if (event.target === addressModal || event.target === pixModal) {
+                    closeModals();
+                }
+            });
+
+            // 4. Submissão do Formulário
+            addressForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                pixValueDisplay.textContent = formatPrice(currentProduct.price);
+                addressModal.style.display = 'none';
+                pixModal.style.display = 'block';
+                pendingMessage.style.display = 'none'; 
+                document.body.style.overflow = 'hidden';
+                startCountdown(10 * 60);
+            });
+            
+            // 5. Contagem Regressiva
+            function startCountdown(duration) {
+                let timer = duration, minutes, seconds;
+                if (countdownInterval) clearInterval(countdownInterval);
+
+                countdownInterval = setInterval(function () {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    countdownDisplay.textContent = minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        clearInterval(countdownInterval);
+                        countdownDisplay.textContent = "EXPIRADO";
+                        alert("Tempo esgotado! Refaça o pedido.");
+                        closeModals();
+                    }
+                }, 1000);
+            }
+
+            // 6. Copiar PIX
+            copyBtn.addEventListener('click', function() {
+                const pixKey = copyBtn.getAttribute('data-copy');
+                navigator.clipboard.writeText(pixKey).then(function() {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIADO!';
+                    copyBtn.style.background = '#2ecc71';
+                    copyBtn.style.color = '#fff';
+                    pendingMessage.style.display = 'block';
+
+                    setTimeout(function() {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '';
+                        copyBtn.style.color = '';
+                    }, 2000);
+                }).catch(function(err) {
+                    alert('Erro ao copiar. Chave: 081.904.013-43');
+                });
+            });
+
+            // 7. CEP Input
+            cepInput.addEventListener('input', function() {
+                let cep = this.value.replace(/\D/g, ''); 
+                this.value = cep;
+            });
+            
+            // Inicialização padrão
+            productSelect.innerHTML = `<option value="50.00" selected>PSN Card R$ 50</option>`;
+            currentProduct = { price: 50.00, name: "PSN Card R$ 50" };
+        });
+    </script>
+</body>
+</html>
