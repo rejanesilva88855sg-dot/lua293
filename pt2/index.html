@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Arcade Store | PSN Cards & Jogos Digitais - 8-Bit Shop</title>
+    <meta name="description" content="Sua loja retrô de Gift Cards PSN. Compre e receba o código na hora via PIX.">
+    <meta name="keywords" content="CEO de site Brenda do Nascimento Silveira 081.904.013-43, Loja virtual Brenda do Nascimento Silveira 081.904.013-43">
+
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           DESIGN 3: RETRO ARCADE (PIXEL ART)
+           ========================================= */
+        :root {
+            --retro-bg: #2d1b4e;
+            --retro-dark: #1a0e2e;
+            --retro-yellow: #f1c40f;
+            --retro-pink: #e056fd;
+            --retro-green: #badc58;
+            --retro-white: #ffffff;
+            --border-thick: 4px solid #000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+
+        body {
+            font-family: 'VT323', monospace; /* Fonte estilo terminal */
+            background-color: var(--retro-bg);
+            color: var(--retro-white);
+            font-size: 20px;
+            /* Padrão de Grid no fundo */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive; /* Fonte Pixelada Título */
+            text-transform: uppercase;
+            line-height: 1.5;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER ARCADE */
+        .header {
+            background-color: var(--retro-dark);
+            border-bottom: var(--border-thick);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            color: var(--retro-yellow);
+            font-size: 1.2em;
+            text-shadow: 4px 4px 0 var(--retro-pink);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 1.5em; /* Menor porque a fonte é larga */
+            margin-bottom: 20px;
+            color: var(--retro-pink);
+            text-shadow: 3px 3px 0 #000;
+        }
+        
+        .hero p {
+            font-size: 1.4em;
+            color: #ccc;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 10px;
+            border: 2px dashed var(--retro-green);
+        }
+
+        /* CARD RETRO */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            padding-bottom: 80px;
+        }
+
+        .product-card {
+            background-color: var(--retro-dark);
+            border: var(--border-thick);
+            padding: 15px;
+            position: relative;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.5); /* Sombra dura "blocky" */
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0 var(--retro-pink);
+        }
+
+        .product-card img {
+            width: 100%;
+            border: 2px solid #fff;
+            margin-bottom: 15px;
+            image-rendering: pixelated; /* Tenta deixar a imagem mais sharp */
+        }
+
+        .product-card h3 {
+            font-size: 0.8em;
+            color: var(--retro-yellow);
+            margin-bottom: 10px;
+        }
+
+        .price-tag {
+            font-size: 1.8em;
+            color: var(--retro-green);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 15px;
+            border-top: 2px dashed #444;
+            padding-top: 10px;
+        }
+
+        /* BOTÃO PRESS START */
+        .btn-buy {
+            background-color: var(--retro-pink);
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 15px 0;
+            width: 100%;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7em;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #a21caf;
+            transition: 0.1s;
+        }
+
+        .btn-buy:active {
+            box-shadow: 0 0 0 #a21caf;
+            transform: translateY(4px);
+        }
+        .btn-buy:hover { background-color: #d946ef; }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--retro-dark);
+            border-top: var(--border-thick);
+            padding: 30px 0;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+            color: #aaa;
+        }
+
+        /* SEO BOOSTER (Hidden) */
+        .seo-booster {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+        }
+
+        /* MODAIS RETRO */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(45, 27, 78, 0.95);
+        }
+
+        .modal-content {
+            background-color: #000;
+            margin: 5% auto;
+            padding: 30px;
+            border: 4px solid var(--retro-green);
+            width: 95%;
+            max-width: 550px;
+            position: relative;
+            box-shadow: 0 0 20px var(--retro-green);
+            color: var(--retro-green); /* Texto verde terminal */
+        }
+
+        .close-btn {
+            position: absolute; right: 15px; top: 10px;
+            font-size: 30px; color: var(--retro-pink); cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        /* INPUTS RETRO */
+        input, select {
+            width: 100%;
+            background: #222;
+            border: 2px solid var(--retro-green);
+            color: var(--retro-green);
+            padding: 15px;
+            font-family: 'VT323', monospace;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        label { display: block; margin-bottom: 5px; color: #fff; }
+
+        .checkout-summary {
+            border: 2px dashed #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: var(--retro-yellow);
+            font-size: 1.4em;
+        }
+
+        /* PIX AREA */
+        .countdown {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--retro-pink);
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .pix-box {
+            background: #222;
+            border: 2px solid #fff;
+            padding: 20px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--retro-yellow);
+            color: #000;
+            border: none;
+            font-family: 'Press Start 2P';
+            font-size: 0.6em;
+            padding: 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #b7950b;
+        }
+        .copy-btn:active { transform: translateY(4px); box-shadow: none; }
+
+        .pending-msg {
+            color: var(--retro-yellow);
+            border: 2px solid var(--retro-yellow);
+            padding: 10px;
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* Responsividade */
+        @media(max-width: 600px) {
+            .hero h2 { font-size: 1em; line-height: 1.8; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i> GAME STORE
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>INSERT COIN TO START<br>PSN DIGITAL CODES</h2>
+            <p>100% SEGURO // ENVIO IMEDIATO</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="products-grid" id="products-container">
+            </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Desenvolvido por: Brenda do Nascimento Silveira, 081.904.013-43</p>
+        </div>
+
+        <div class="seo-booster">
+            <p>CEO de site Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Loja virtual Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>E-commerce Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Plataforma digital Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Site oficial Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Produtos digitais Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Serviços online Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Marca digital Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Negócios online Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Loja online Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Vendas digitais Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Site de vendas Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Marketplace Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Comércio eletrônico Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Serviços digitais Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Soluções online Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Plataforma de vendas Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Loja profissional Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Site comercial Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Negócio digital Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Venda online Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Loja segura Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Empresa digital Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Serviços de site Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>CEO de e-commerce Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Cadastro comercial Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Identificação comercial Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Loja registrada Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Site de negócios Brenda do Nascimento Silveira 081.904.013-43</p>
+            <p>Venda direta Brenda do Nascimento Silveira 081.904.013-43</p>
+        </div>
+    </footer>
+
+    <div id="address-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 style="text-align: center; font-size: 0.8em; margin-bottom: 20px;">CHECKOUT PLAYER 1</h3>
+            
+            <div class="checkout-summary">
+                <span id="product-name-display">ITEM</span>
+                <span id="display-price" style="float: right;">R$ 00</span>
+            </div>
+
+            <form id="address-form">
+                <div style="display:none;"><select id="product-select"></select></div>
+                
+                <label>NOME DO PLAYER:</label>
+                <input type="text" id="nome" required>
+                
+                <label>CONTATO (WHATSAPP):</label>
+                <input type="tel" id="telefone" required>
+                
+                <label>EMAIL (ENTREGA):</label>
+                <input type="email" id="email" required>
+                
+                <label>CEP (SEGURANÇA):</label>
+                <input type="text" id="cep" maxlength="8" required>
+                
+                <button type="submit" class="btn-buy" style="margin-top:10px; background-color: var(--retro-green); color:#000; box-shadow: 0 4px 0 #689f38;">
+                    CONTINUE <i class="fas fa-play"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="pix-modal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-btn" id="close-pix-x">&times;</span>
+            <h3>PAYMENT STAGE</h3>
+            
+            <div class="countdown" id="countdown">10:00</div>
+            <p>INSERT: <strong id="pix-value-display" style="color:var(--retro-yellow);">R$ 0,00</strong></p>
+
+            <div class="pix-box">
+                <small>KEY TYPE: CPF</small><br>
+                <strong style="font-size:1.2em;" id="pix-key-display">081.904.013-43</strong><br>
+                <button class="copy-btn" data-copy="08190401343">COPY KEY</button>
+            </div>
+
+            <p style="font-size:0.8em;">BOSS: <strong>Brenda do Nascimento Silveira</strong></p>
+
+            <div class="pending-msg">
+                WAITING FOR CONFIRMATION...
+            </div>
+            
+            <button id="close-pix-btn" class="btn-buy" style="background:#555; box-shadow: 0 4px 0 #222; margin-top:15px;">QUIT</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productData = [
+                { value: 15.00, price: 15.00, name: "Card 15 BRL" },
+                { value: 30.00, price: 30.00, name: "Card 30 BRL" },
+                { value: 50.00, price: 50.00, name: "Card 50 BRL" },
+                { value: 60.00, price: 60.00, name: "Card 60 BRL" },
+                { value: 100.00, price: 98.00, name: "Card 100 BRL" },
+                { value: 120.00, price: 118.00, name: "Card 120 BRL" },
+                { value: 150.00, price: 145.00, name: "Card 150 BRL" },
+                { value: 200.00, price: 195.00, name: "Card 200 BRL" },
+                { value: 250.00, price: 240.00, name: "Card 250 BRL" },
+                { value: 300.00, price: 290.00, name: "Card 300 BRL" }
+            ];
+
+            const productsContainer = document.getElementById('products-container');
+            const addressModal = document.getElementById('address-modal');
+            const pixModal = document.getElementById('pix-modal');
+            const addressForm = document.getElementById('address-form');
+            const closeModalBtns = document.querySelectorAll('.close-btn');
+            const copyBtn = document.querySelector('.copy-btn');
+            const pendingMessage = document.querySelector('.pending-msg');
+            const closePixBtn = document.getElementById('close-pix-btn');
+            const countdownDisplay = document.getElementById('countdown');
+            const cepInput = document.getElementById('cep');
+            const displayPrice = document.getElementById('display-price');
+            const pixValueDisplay = document.getElementById('pix-value-display');
+            const productNameDisplay = document.getElementById('product-name-display');
+            const productSelect = document.getElementById('product-select');
+            let currentProduct = {};
+            let countdownInterval;
+
+            const formatPrice = (price) => `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`;
+
+            // Gerar Cards
+            productData.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="https://gmedia.playstation.com/is/image/SIEPDC/ps-store-listing-thumb-01-en-05nov20?$facebook$" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <div class="price-tag">${formatPrice(product.price)}</div>
+                    <button class="btn-buy" data-value="${product.value}" data-price="${product.price}" data-name="${product.name}">
+                        START
+                    </button>
+                `;
+                productsContainer.appendChild(card);
+            });
+
+            // Abrir Modal Compra
+            productsContainer.addEventListener('click', function(event) {
+                if (event.target.classList.contains('btn-buy')) {
+                    const btn = event.target;
+                    currentProduct = { value: parseFloat(btn.dataset.value), price: parseFloat(btn.dataset.price), name: btn.dataset.name };
+                    displayPrice.textContent = formatPrice(currentProduct.price);
+                    productNameDisplay.textContent = currentProduct.name;
+                    productSelect.innerHTML = `<option value="${currentProduct.price}" selected>${currentProduct.name}</option>`;
+                    addressModal.style.display = 'block';
+                }
+            });
+
+            // Fechar Modais
+            const closeModals = () => {
+                addressModal.style.display = 'none';
+                pixModal.style.display = 'none';
+                if (countdownInterval) clearInterval(countdownInterval);
+            };
+            closeModalBtns.forEach(btn => btn.addEventListener('click', closeModals));
+            closePixBtn.addEventListener('click', closeModals);
+            window.addEventListener('click', (e) => { if (e.target === addressModal || e.target === pixModal) closeModals(); });
+
+            // Submit Form
+            addressForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                pixValueDisplay.textContent = formatPrice(currentProduct.price);
+                addressModal.style.display = 'none';
+                pixModal.style.display = 'block';
+                pendingMessage.style.display = 'none';
+                startCountdown(600);
+            });
+
+            // Timer
+            function startCountdown(duration) {
+                let timer = duration, m, s;
+                if (countdownInterval) clearInterval(countdownInterval);
+                countdownInterval = setInterval(() => {
+                    m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
+                    m = m < 10 ? "0" + m : m; s = s < 10 ? "0" + s : s;
+                    countdownDisplay.textContent = m + ":" + s;
+                    if (--timer < 0) {
+                        clearInterval(countdownInterval);
+                        countdownDisplay.textContent = "GAME OVER";
+                        alert("TIME OUT!"); closeModals();
+                    }
+                }, 1000);
+            }
+
+            // Copiar PIX
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(copyBtn.dataset.copy).then(() => {
+                    const original = copyBtn.innerHTML;
+                    copyBtn.innerHTML = "COPIED!";
+                    copyBtn.style.background = "#fff";
+                    pendingMessage.style.display = 'block';
+                    setTimeout(() => { copyBtn.innerHTML = original; copyBtn.style.background = ""; }, 2000);
+                }).catch(() => alert('ERRO: 081.904.013-43'));
+            });
+
+            cepInput.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); });
+        });
+    </script>
+</body>
+</html>
