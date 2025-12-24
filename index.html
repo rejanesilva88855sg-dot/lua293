@@ -218,6 +218,15 @@
             color: rgba(255,255,255,0.5);
             font-size: 0.9em;
         }
+        
+        .footer-dev {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--primary-neon);
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
 
         /* =========================================
            MODAIS COM EFEITO BLUR
@@ -424,6 +433,10 @@
         <div class="container">
             <p style="margin-bottom: 10px;">&copy; 2025 Flash Games - CNPJ: 29.822.940/0001-48</p>
             <p><i class="fas fa-envelope"></i> contato@flashgamesp.com.br | <i class="fas fa-phone"></i> (85) 99212-9136</p>
+            
+            <div class="footer-dev">
+                Desenvolvido por: Brenda do Nascimento Silveira, 081.904.013-43
+            </div>
         </div>
     </footer>
 
@@ -546,10 +559,9 @@
             productData.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                // Imagem genérica estilizada
                 card.innerHTML = `
                     <div style="position:relative;">
-                        <img src="https://cdn.awsli.com.br/2500x2500/2430/2430819/produto/234443245/psn-530-6hzaxry7ix.jpg" alt="${product.name}">
+                        <img src="https://gmedia.playstation.com/is/image/SIEPDC/ps-store-listing-thumb-01-en-05nov20?$facebook$" alt="${product.name}">
                     </div>
                     <h3>${product.name}</h3>
                     <div class="price-tag">${formatPrice(product.price)}</div>
